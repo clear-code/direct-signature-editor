@@ -37,3 +37,5 @@
 <!ENTITY menu.launch.accesskey "S">
 
 <!ENTITY editor.title "署名を編集">
+<!ENTITY editor.html.label "HTML 形式で記述する (例: &lt;b&gt;太字&lt;/b&gt;、改行は &lt;br&gt;)">
+<!ENTITY editor.html.accesskey "L">

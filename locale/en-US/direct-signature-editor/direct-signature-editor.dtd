@@ -37,3 +37,5 @@
 <!ENTITY menu.launch.accesskey "S">
 
 <!ENTITY editor.title "Edit Signature">
+<!ENTITY editor.html.label "Use HTML (e.g., &lt;b&gt;bold&lt;/b&gt;)">
+<!ENTITY editor.html.accesskey "L">

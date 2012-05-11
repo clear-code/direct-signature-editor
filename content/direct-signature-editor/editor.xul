@@ -42,6 +42,16 @@
 	dialogbuttons="accept,cancel"
 	ondialogaccept="DirectSignatureEditor.onAccept();"
 	ondialogcancel="DirectSignatureEditor.onCancel();"
-	persist="screenX,screenY,width,height">
+	persist="screenX,screenY,width,height"
+	width="400"
+	height="300">
+<hbox>
+	<checkbox id="html-type-checkbox"
+		label="&editor.html.label;"
+		accesskey="&editor.html.accesskey;"/>
+</hbox>
+<textbox id="editor-field"
+	flex="1"
+	multiline="true"/>
 <script type="application/javascript" src="editor.js" />
 </dialog>
