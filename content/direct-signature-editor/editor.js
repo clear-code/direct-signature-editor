@@ -37,6 +37,48 @@ Components.utils.import("resource://direct-signature-editor-modules/prefs.js");
 Components.utils.import("resource://direct-signature-editor-modules/textIO.jsm");
 
 var DirectSignatureEditor = {
+	domain : 'extensions.direct-signature-editor@clear-code.com.',
+
+	get AccountManager()
+	{
+		return this._AccountManager ||
+			(this._AccountManager = Components.classes['@mozilla.org/messenger/account-manager;1']
+										.getService(Components.interfaces.nsIMsgAccountManager));
+	},
+	_AccountManager : null,
+
+	get identity()
+	{
+		if (!this._identity) {
+			var identities = this.AccountManager.allIdentities;
+			for (var i = 0, maxi = identities.Count(), identity; i < maxi; i++)
+			{
+				identity = identities.QueryElementAt(i, Components.interfaces.nsIMsgIdentity);
+				if (identity.key == this.id) {
+					this._identity = identity;
+					break;
+				}
+			}
+		}
+		return this._identity;
+	},
+	_identity : null,
+
+	get HTMLCheck()
+	{
+		return document.getElementById('html-type-checkbox');
+	},
+
+	get field()
+	{
+		return document.getElementById('editor-field');
+	},
+
+	get id()
+	{
+		return prefs.getPref(this.domain + 'identity');
+	},
+
 	mIOService : Components.classes['@mozilla.org/network/io-service;1']
 		.getService(Components.interfaces.nsIIOService),
 
@@ -62,14 +104,37 @@ var DirectSignatureEditor = {
 		window.addEventListener('unload', this, false);
 
 		this.load();
+		this.field.focus();
 	},
 
 	save : function()
 	{
+		this.identity.htmlSigFormat = this.HTMLCheck.checked;
+
+		var value = this.field.value || '';
+		if (value != this.initialState) {
+			if (this.identity.attachSignature) {
+				textIO.writeTo(value, this.identity.signature, 'UTF-8');
+			}
+			else {
+				this.identity.htmlSigText = value;
+			}
+		}
 	},
 
 	load : function()
 	{
+		this.HTMLCheck.checked = this.identity.htmlSigFormat;
+
+		if (this.identity.attachSignature) {
+			this.initialState = textIO.readFrom(this.identity.signature, 'UTF-8');
+			this.HTMLCheck.hidden = true;
+		}
+		else {
+			this.initialState = this.identity.htmlSigText;
+			this.HTMLCheck.hidden = false;
+		}
+		this.field.value = this.initialState;
 	},
 
 
