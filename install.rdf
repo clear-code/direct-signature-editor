@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>direct-signature-editor@clear-code.com</em:id>
+		<em:name>Direct Signature Editor</em:name>
+		<em:version>0.1</em:version>
+		<em:description>Provides ability to customize signature from the "Tools" menu.</em:description>
+		<em:creator>ClearCode inc.</em:creator>
+		<!--em:optionsURL></em:optionsURL-->
+		<!--em:homepageURL>http://www.clear-code.com/oss/tb/</em:homepageURL-->
+
+		<em:updateURL>http://www.clear-code.com/update.rdf</em:updateURL>
+		<em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN4ESXDa0ljqzSDoGs9yy82aR+8tPBIPT8O3FwvXleCB815eOCIKH4lT7L7nK9LKOzdrP5EwiqfugyM+SEXSikbgi+UEfM04HqAomXWUqc7tvXb1kmqx2VwLHxm1tiKuulv1HgHmJtYOh09Tv3+q6VOGX2SDcNe6dgnhnAIP4kYwIDAQAB</em:updateKey>
+
+
+    <em:localized>
+      <Description em:locale="en-US"
+                   em:name="Direct Signature Editor"
+                   em:description="Provides ability to customize signature from the &quot;Tools&quot; menu."
+                   em:creator="ClearCode Inc."
+                   em:homepageURL="http://www.clear-code.com/"/>
+    </em:localized>
+    <em:localized>
+      <Description em:locale="ja"
+                   em:name="署名の直接編集"
+                   em:description="「ツール」メニューから直接署名を編集できるようにします。"
+                   em:creator="株式会社クリアコード"
+                   em:homepageURL="http://www.clear-code.com/"/>
+    </em:localized>
+
+		<em:targetApplication>
+			<!-- Thunderbird -->
+			<Description em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
+				em:minVersion="10.0"
+				em:maxVersion="15.0a1" />
+		</em:targetApplication>
+	</Description>
+</RDF>

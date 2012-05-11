@@ -1,0 +1,10 @@
+content	direct-signature-editor	jar:chrome/direct-signature-editor.jar!/content/direct-signature-editor/
+
+overlay	chrome://messenger/content/messenger.xul	chrome://direct-signature-editor/content/globalOverlay.xul
+overlay	chrome://messenger/content/messageWindow.xul	chrome://direct-signature-editor/content/globalOverlay.xul
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://direct-signature-editor/content/globalOverlay.xul
+
+locale	direct-signature-editor	en-US	jar:chrome/direct-signature-editor.jar!/locale/en-US/direct-signature-editor/
+locale	direct-signature-editor	ja	jar:chrome/direct-signature-editor.jar!/locale/ja/direct-signature-editor/
+
+resource direct-signature-editor-modules modules/
