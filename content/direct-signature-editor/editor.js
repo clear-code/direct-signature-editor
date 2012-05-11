@@ -47,18 +47,22 @@ var DirectSignatureEditor = {
 	},
 	_AccountManager : null,
 
+	get allIdentities()
+	{
+		var returnValue = [];
+		var identities = this.AccountManager.allIdentities;
+		for (var i = 0, maxi = identities.Count(), identity; i < maxi; i++)
+		{
+			identity = identities.QueryElementAt(i, Components.interfaces.nsIMsgIdentity);
+			returnValue.push(identity);
+		}
+		return returnValue;
+	},
+
 	get identity()
 	{
-		if (!this._identity) {
-			var identities = this.AccountManager.allIdentities;
-			for (var i = 0, maxi = identities.Count(), identity; i < maxi; i++)
-			{
-				identity = identities.QueryElementAt(i, Components.interfaces.nsIMsgIdentity);
-				if (identity.key == this.id) {
-					this._identity = identity;
-					break;
-				}
-			}
+		if (!this._identity && this.id) {
+			this._identity = this.AccountManager.getIdentity(this.id);
 		}
 		return this._identity;
 	},
@@ -76,7 +80,8 @@ var DirectSignatureEditor = {
 
 	get id()
 	{
-		return prefs.getPref(this.domain + 'identity');
+		return prefs.getPref(this.domain + 'identity') ||
+				this.AccountManager.defaultAccount.defaultIdentity.key;
 	},
 
 	mIOService : Components.classes['@mozilla.org/network/io-service;1']
