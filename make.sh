@@ -1,1 +1,0 @@
-direct-signature-editor.sh
