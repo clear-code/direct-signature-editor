@@ -35,6 +35,7 @@
 
 Components.utils.import("resource://direct-signature-editor-modules/prefs.js");
 Components.utils.import("resource://direct-signature-editor-modules/textIO.jsm");
+Components.utils.import("resource://direct-signature-editor-modules/charset.jsm");
 
 var DirectSignatureEditor = {
 	domain : 'extensions.direct-signature-editor@clear-code.com.',
@@ -84,6 +85,24 @@ var DirectSignatureEditor = {
 				this.AccountManager.defaultAccount.defaultIdentity.key;
 	},
 
+	get fileCharset()
+	{
+		return (this._fileCharset ||
+				(this._fileCharset = this.getFileCharset()));
+	},
+	_fileCharset : null,
+
+	getFileCharset : function()
+	{
+		var file = this.identity.signature;
+		if (!file) return 'UTF-8';
+
+		var contents = textIO.readFrom(this.identity.signature);
+		if (isUTF8(contents)) return 'UTF-8';
+		if (isUTF16(contents)) return 'UTF-16';
+		return prefs.getPref(this.domain + 'defaultFileEncoding')
+	},
+
 	init : function()
 	{
 		window.removeEventListener('DOMContentLoaded', this, false);
@@ -100,7 +119,7 @@ var DirectSignatureEditor = {
 		var value = this.field.value || '';
 		if (value != this.initialState) {
 			if (this.identity.attachSignature) {
-				textIO.writeTo(value, this.identity.signature, 'UTF-8');
+				textIO.writeTo(value, this.identity.signature, this.fileCharset);
 			}
 			else {
 				this.identity.htmlSigText = value;
@@ -113,7 +132,7 @@ var DirectSignatureEditor = {
 		this.HTMLCheck.checked = this.identity.htmlSigFormat;
 
 		if (this.identity.attachSignature) {
-			this.initialState = textIO.readFrom(this.identity.signature, 'UTF-8');
+			this.initialState = textIO.readFrom(this.identity.signature, this.fileCharset);
 			this.HTMLCheck.hidden = true;
 		}
 		else {
