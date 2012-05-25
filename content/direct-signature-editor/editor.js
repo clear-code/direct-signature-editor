@@ -98,8 +98,18 @@ var DirectSignatureEditor = {
 		if (!file) return 'UTF-8';
 
 		var contents = textIO.readFrom(this.identity.signature);
+
 		if (isUTF8(contents)) return 'UTF-8';
 		if (isUTF16(contents)) return 'UTF-16';
+
+		try {
+			decodeURIComponent(escape(contents));
+			return 'UTF-8';
+		}
+		catch(e) {
+			// malformed URI error raises for not-UTF-8 encodings.
+		}
+
 		return prefs.getPref(this.domain + 'defaultFileEncoding')
 	},
 
