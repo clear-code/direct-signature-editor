@@ -43,4 +43,11 @@
 		accesskey="&menu.launch.accesskey;"
 		oncommand="DirectSignatureEditorOverlay.launch();"/>
 </menupopup>
+<menupopup id="appmenu_taskPopup">
+	<menuitem id="direct-signature-editor-launch-appmenu"
+		insertbefore="devToolsSeparator"
+		label="&menu.launch.label;"
+		accesskey="&menu.launch.accesskey;"
+		oncommand="DirectSignatureEditorOverlay.launch();"/>
+</menupopup>
 </overlay>
