@@ -1,13 +1,11 @@
 /**
- * @fileOverview Plaintext File I/O Library for Firefox 3.5 or later
+ * @fileOverview Plaintext File I/O Library for Firefox 52 or later
  * @author       ClearCode Inc.
- * @version      3
+ * @version      5
  *
  * @license
- *   The MIT License, Copyright (c) 2010 ClearCode Inc.
- *   https://github.com/clear-code/js-codemodules/blob/master/license.txt
- * @url https://github.com/clear-code/js-codemodules/blob/master/textIO.jsm
- * @url https://github.com/clear-code/js-codemodules/blob/master/textIO.test.js
+ *   The MIT License, Copyright (c) 2010-2018 ClearCode Inc.
+ * @url https://github.com/clear-code/js-codemodule-text-io
  */
 
 if (typeof window == 'undefined' ||
@@ -21,10 +19,10 @@ if (typeof namespace == 'undefined') {
 	try {
 		let ns = {};
 		Components.utils.import('resource://my-modules/namespace.jsm', ns);
-		namespace = ns.getNamespaceFor('clear-code.com');
+		this.namespace = ns.getNamespaceFor('clear-code.com');
 	}
 	catch(e) {
-		namespace = (typeof window != 'undefined' ? window : null ) || {};
+		this.namespace = (typeof window != 'undefined' ? window : null ) || {};
 	}
 }
 
@@ -146,14 +144,14 @@ var textIO;
 				try {
 					if (aDir.parent) arguments.callee(aDir.parent);
 					if (aDir.exists()) return;
-					aDir.create(aDir.DIRECTORY_TYPE, 0755);
+					aDir.create(aDir.DIRECTORY_TYPE, 0o755);
 				}
 				catch(e) {
 				}
 			})(aFile.parent);
 
 			if (aFile.exists()) aFile.remove(true);
-			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
+			aFile.create(aFile.NORMAL_FILE_TYPE, 0o666);
 
 			var stream = Cc['@mozilla.org/network/file-output-stream;1']
 					.createInstance(Ci.nsIFileOutputStream);
