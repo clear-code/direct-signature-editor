@@ -4,7 +4,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>direct-signature-editor@clear-code.com</em:id>
 		<em:name>Direct Signature Editor</em:name>
-		<em:version>0.4</em:version>
+		<em:version>0.5</em:version>
 		<em:description>Provides ability to customize signature from the "Tools" menu.</em:description>
 		<em:creator>ClearCode inc.</em:creator>
 		<em:type>2</em:type>
