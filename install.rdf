@@ -4,7 +4,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>direct-signature-editor@clear-code.com</em:id>
 		<em:name>Direct Signature Editor</em:name>
-		<em:version>0.3</em:version>
+		<em:version>0.4</em:version>
 		<em:description>Provides ability to customize signature from the "Tools" menu.</em:description>
 		<em:creator>ClearCode inc.</em:creator>
 		<em:type>2</em:type>
@@ -33,8 +33,8 @@
 		<em:targetApplication>
 			<!-- Thunderbird -->
 			<Description em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
-				em:minVersion="10.0"
-				em:maxVersion="38.*" />
+				em:minVersion="52.0"
+				em:maxVersion="60.*" />
 		</em:targetApplication>
 	</Description>
 </RDF>
